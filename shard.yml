@@ -1,0 +1,15 @@
+name: sharock_api
+version: 0.1.0
+
+dependencies:
+  kemal:
+    github: sdogruyol/kemal
+    branch: master
+  mysql:
+    github: pine613/crystal-mysql
+    branch: "feature/bigint"
+
+authors:
+    - Pine Mizune <pinemz@gmail.com>
+
+license: MIT

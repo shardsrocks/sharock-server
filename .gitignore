@@ -1,0 +1,5 @@
+/.crystal
+/.shards
+/libs
+
+/bin/sharock-api-server

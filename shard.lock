@@ -1,0 +1,10 @@
+version: 1.0
+shards:
+  kemal:
+    github: sdogruyol/kemal
+    commit: 211685ee7407e23b7579394c0ac499ff518b6e19
+
+  mysql:
+    github: pine613/crystal-mysql
+    commit: 7c3792ea963173a5690dd85fb8e99e20bae4b4d6
+
