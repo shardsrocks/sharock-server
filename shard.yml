@@ -8,6 +8,12 @@ dependencies:
   mysql:
     github: pine613/crystal-mysql
     branch: "feature/bigint"
+  redis:
+    github: stefanwille/crystal-redis
+    version: ~> 1.2.1
+  resque_client:
+    github: pine613/crystal-resque-client
+    version: 0.1.0
 
 authors:
     - Pine Mizune <pinemz@gmail.com>
