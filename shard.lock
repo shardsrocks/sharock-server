@@ -5,8 +5,8 @@ shards:
     commit: 211685ee7407e23b7579394c0ac499ff518b6e19
 
   mysql:
-    github: pine613/crystal-mysql
-    commit: 7c3792ea963173a5690dd85fb8e99e20bae4b4d6
+    github: waterlink/crystal-mysql
+    commit: ece33e0ee7a7ffe3e7a68e5018ad40050d9e01fd
 
   redis:
     github: stefanwille/crystal-redis

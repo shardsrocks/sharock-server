@@ -6,8 +6,8 @@ dependencies:
     github: sdogruyol/kemal
     branch: master
   mysql:
-    github: pine613/crystal-mysql
-    branch: "feature/bigint"
+    github: waterlink/crystal-mysql
+    commit: ece33e0ee7a7ffe3e7a68e5018ad40050d9e01fd
   redis:
     github: stefanwille/crystal-redis
     version: ~> 1.2.1
