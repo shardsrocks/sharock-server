@@ -18,15 +18,14 @@ resources = AllResources.new(db, redis)
 services = AllServices.new(resources)
 package_ctrl = PackageController.new(services)
 
-get "/" do
-  p resources.package.find
+get "/" do |env|
+  "Hello Sharock"
 end
 
-get "/api/package/github/:owner/:repo" do |env|
-  # package_ctrl.find_one_by_github(env)
-  package_ctrl.sync_by_github(env)
+get "/package/github/:owner/:repo" do |env|
+  package_ctrl.find_one_by_github(env)
 end
 
-post "/api/package/github/:owner/:repo/sync" do |env|
+post "/package/github/:owner/:repo/sync" do |env|
   package_ctrl.sync_by_github(env)
 end

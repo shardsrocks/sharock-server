@@ -13,7 +13,9 @@ module Sharock::Controllers::API
 
       if owner.is_a? String && repo.is_a? String
         package = @services.package.find_one(host, owner, repo)
-        return package.to_json
+        if package != nil
+          return package.to_json
+        end
       end
 
       return render_404
