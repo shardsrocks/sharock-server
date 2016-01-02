@@ -10,7 +10,7 @@
 ## Design
 
 - Use [kemal](https://github.com/sdogruyol/kemal)
-- 4 layers
+- The 4 layers architecture
   - Entity (= Model)
   - Resource (= DB / Redis)
   - Service (= Business logic)
