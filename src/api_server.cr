@@ -1,5 +1,6 @@
 require "kemal"
 require "mysql"
+require "redis"
 
 require "./entities/*"
 require "./resources/all"
@@ -10,9 +11,10 @@ include Sharock::Controllers::API
 include Sharock::Services
 include Sharock::Resources
 
-conn = MySQL.connect("localhost", "root", "", "sharock", 3306_u16, nil)
+db = MySQL.connect("localhost", "root", "", "sharock", 3306_u16, nil)
+redis = Redis.new
 
-resources = AllResources.new(conn)
+resources = AllResources.new(db, redis)
 services = AllServices.new(resources)
 package_ctrl = PackageController.new(services)
 

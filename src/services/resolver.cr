@@ -5,6 +5,7 @@ module Sharock::Services
 
     def sync(host, owner, repo)
       package = @resources.package.find_or_create_for_update(host, owner, repo)
+      @resources.resolver.enqueue(package.id)
     end
   end
 end

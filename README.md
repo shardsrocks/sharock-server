@@ -11,7 +11,7 @@
 - Use [kemal](https://github.com/sdogruyol/kemal)
 - 4 layers
   - Entity (= Model)
-  - Resource (= DB)
+  - Resource (= DB / Redis)
   - Service (= Business logic)
   - Controller
 
