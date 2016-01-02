@@ -28,8 +28,8 @@ module Sharock::Controllers::API
       repo = env.params["repo"]
 
       if owner.is_a? String && repo.is_a? String
-        package = @services.resolver.sync(host, owner, repo)
-        p package
+        @services.resolver.sync(host, owner, repo)
+        return { "ok": true }.to_json
       end
 
       return render_404
