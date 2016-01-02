@@ -5,6 +5,7 @@
 - Crystal v0.10.0
 - MySQL
 - Redis
+- goworker ([Resque](https://github.com/benmanns/goworker) compatible)
 
 ## Design
 
