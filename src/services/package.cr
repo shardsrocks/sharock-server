@@ -1,18 +1,28 @@
+require "../resources/db/package"
+require "../resources/db/package_deps"
+
+include Sharock::Resources
+
 module Sharock::Services
   class PackageService
-    def initialize(@resources)
+    def initialize(@pool)
     end
 
     def find_one(host, owner, repo)
-      @resources.db.connect do |conn|
-        package = @resources.package(conn).find_one(host, owner, repo)
+      @pool.connect do |conn|
+        package = PackageResource.new(conn).find_one(host, owner, repo)
         package.try do |package|
-          package_deps = @resources.package_deps(conn).find_one_latest_version(package.id)
+          package_deps = PackageDepsResource.new(conn).find_one_latest_version(package.id)
           package_deps.try do |package_deps|
             return Entities::Results::Package.new(package, package_deps)
           end
         end
       end
+    end
+
+    def update_deps(id, deps)
+      p id
+      p deps
     end
 
     def needs_syncing(package : Entities::Results::Package?)

@@ -6,7 +6,7 @@ module Sharock::Services
     getter resolver
 
     def initialize(resources)
-      @package = PackageService.new(resources)
+      @package = PackageService.new(resources.db)
       @resolver = ResolverService.new(resources)
     end
   end
