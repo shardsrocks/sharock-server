@@ -4,9 +4,10 @@ module Sharock::Entities::Rows
     getter host
     getter owner
     getter repo
+    getter sync_started_at
     getter created_at
 
-    def initialize(@id, @host, @owner, @repo, @created_at)
+    def initialize(@id, @host, @owner, @repo, @sync_started_at, @created_at)
     end
 
     def to_json(io : IO)

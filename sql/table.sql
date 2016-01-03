@@ -1,10 +1,11 @@
 -- package
 CREATE TABLE `package` (
-  `id`        INTEGER        NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  `host`      ENUM('github') NOT NULL DEFAULT 'github',
-  `owner`     VARCHAR(100)   NOT NULL,
-  `repo`      VARCHAR(100)   NOT NULL,
-  `created_at` TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `id`              INTEGER        NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `host`            ENUM('github') NOT NULL DEFAULT 'github',
+  `owner`           VARCHAR(100)   NOT NULL,
+  `repo`            VARCHAR(100)   NOT NULL,
+  `sync_started_at` DATETIME,
+  `created_at`      TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE UNIQUE INDEX `package_host_owner_repo_uniq`

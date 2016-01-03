@@ -5,14 +5,19 @@ require "./redis/*"
 
 module Sharock::Resources
   class AllResources
-    getter package
-    getter package_deps
+    getter db
     getter resolver
 
-    def initialize(db, redis)
-      @package = PackageResource.new(db)
-      @package_deps = PackageDepsResource.new(db)
+    def initialize(@db, redis)
       @resolver = Redis::ResolverResource.new(redis)
+    end
+
+    def package(conn)
+      PackageResource.new(conn)
+    end
+
+    def package_deps(conn)
+      PackageDepsResource.new(conn)
     end
   end
 end

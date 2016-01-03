@@ -3,40 +3,42 @@ module Sharock::Resources
     include Inflater::Package
     include Query::Select
 
-    def initialize(pool)
-      @pool = pool
+    def initialize(@conn)
     end
 
     def find
-      @pool.connect do |conn|
-        inflate select(conn, "package")
-      end
+      inflate select(@conn, "package")
     end
 
-    def find_one(id)
-      @pool.connect do |conn|
-        inflate_one select_by_id(conn, "package", id)
-      end
+    def find_one_by_id(id, for_update = false)
+      inflate_one select_by_id(@conn, "package", id, for_update)
     end
 
-    def find_one(host, owner, repo)
-      @pool.connect do |conn|
-        inflate_one select_by_repo(conn, host, owner, repo)
-      end
+    def find_one(host, owner, repo, for_update = false)
+      inflate_one select_by_repo(host, owner, repo, for_update)
     end
 
-    def find_or_create_for_update(host, owner, repo)
-      @pool.connect do |conn|
-        rows = select_by_repo(conn, host, owner, repo)
-        if rows == [] of Entities::Rows::Package
-          insert_by_repo(conn, host, owner, repo)
-        end
-
-        inflate_one select_by_repo(conn, host, owner, repo, true)
+    def find_or_create(host, owner, repo, for_update = false)
+      rows = select_by_repo(host, owner, repo)
+      if rows == [] of Entities::Rows::Package
+        insert_by_repo(host, owner, repo)
       end
+
+      inflate_one select_by_repo(host, owner, repo, for_update)
     end
 
-    protected def insert_by_repo(conn, host, owner, repo)
+    def update_sync_started_at(id, sync_started_at)
+      params = {"id" => id, "sync_started_at" => sync_started_at}
+      MySQL::Query
+        .new(%{
+          UPDATE `package`
+          SET sync_started_at = :sync_started_at
+          WHERE `id` = :id
+        }, params)
+        .run(@conn)
+    end
+
+    protected def insert_by_repo(host, owner, repo)
       params = {"host" => host, "owner" => owner, "repo" => repo}
       MySQL::Query
         .new(%{
@@ -45,10 +47,10 @@ module Sharock::Resources
           ON DUPLICATE KEY UPDATE
             `host` = :host, `owner` = :owner, `repo` = :repo
         }, params)
-        .run(conn)
+        .run(@conn)
     end
 
-    protected def select_by_repo(conn, host, owner, repo, for_update = false)
+    protected def select_by_repo(host, owner, repo, for_update = false)
       for_update = for_update ? "FOR UPDATE" : ""
       params = {"host" => host, "owner" => owner, "repo" => repo}
       MySQL::Query
@@ -59,7 +61,7 @@ module Sharock::Resources
           LIMIT 1
           #{for_update}
         }, params)
-        .run(conn)
+        .run(@conn)
     end
   end
 end

@@ -2,6 +2,7 @@ require "kemal"
 require "mysql"
 require "redis"
 
+require "./config/*"
 require "./connections/*"
 require "./controllers/*"
 require "./entities/*"

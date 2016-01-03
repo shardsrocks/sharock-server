@@ -6,8 +6,8 @@ dependencies:
     github: sdogruyol/kemal
     branch: master
   mysql:
-    github: waterlink/crystal-mysql
-    commit: ece33e0ee7a7ffe3e7a68e5018ad40050d9e01fd
+    github: pine613/crystal-mysql
+    branch: fix/datetime
   redis:
     github: stefanwille/crystal-redis
     version: ~> 1.2.1

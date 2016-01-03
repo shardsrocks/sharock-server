@@ -2,11 +2,11 @@ version: 1.0
 shards:
   kemal:
     github: sdogruyol/kemal
-    commit: 806b129b1ca73ca33c91f45e8aa2bd4786a8645e
+    commit: c21567fe17e67523726ca33373fa9c3f05454904
 
   mysql:
-    github: waterlink/crystal-mysql
-    commit: ece33e0ee7a7ffe3e7a68e5018ad40050d9e01fd
+    github: pine613/crystal-mysql
+    commit: 044f8f73a2422f360868ea26c17a215a13e34a80
 
   pool:
     github: ysbaddaden/pool

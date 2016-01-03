@@ -19,7 +19,8 @@ module Sharock::Resources::Inflater
           row[1] as String, # host
           row[2] as String, # owner
           row[3] as String, # repo
-          row[4] as Time    # created_at
+          row[4] as Time?,  # sync_started_at
+          row[5] as Time    # created_at
         )
       else
         nil
