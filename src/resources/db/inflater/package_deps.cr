@@ -9,7 +9,7 @@ module Sharock::Resources::Inflater
     end
 
     def inflate_one(response)
-      inflate(response).first
+      inflate(response).first?
     end
 
     protected def inflate_row(row)

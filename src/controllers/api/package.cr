@@ -13,28 +13,15 @@ module Sharock::Controllers::API
 
       if owner.is_a? String && repo.is_a? String
         package = @services.package.find_one(host, owner, repo)
-        if package != nil
-          return package.to_json
+
+        if @services.package.needs_syncing(package)
+          @services.resolver.sync(host, owner, repo)
         end
+
+        return package.to_json
       end
 
-      return render_404
-    end
-
-    def sync_by_github(env)
-      sync(env, "github")
-    end
-
-    def sync(env, host)
-      owner = env.params["owner"]
-      repo = env.params["repo"]
-
-      if owner.is_a? String && repo.is_a? String
-        @services.resolver.sync(host, owner, repo)
-        return { "ok": true }.to_json
-      end
-
-      return render_404
+      raise "Invalid parameters"
     end
   end
 end
