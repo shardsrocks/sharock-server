@@ -41,9 +41,6 @@ module Sharock::Resources
         .run(@conn)
     end
 
-    def update_deps(id)
-    end
-
     protected def insert_by_repo(host, owner, repo)
       params = {"host" => host, "owner" => owner, "repo" => repo}
       MySQL::Query
