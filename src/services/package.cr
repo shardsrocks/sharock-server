@@ -5,10 +5,8 @@ module Sharock::Services
 
     def find_one(host, owner, repo)
       package = @resources.package.find_one(host, owner, repo)
-
       package.try do |package|
         package_deps = @resources.package_deps.find_one_latest_version(package.id)
-
         package_deps.try do |package_deps|
           return Entities::Results::Package.new(package, package_deps)
         end
