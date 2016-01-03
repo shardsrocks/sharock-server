@@ -14,6 +14,9 @@ dependencies:
   resque_client:
     github: pine613/crystal-resque-client
     version: 0.1.0
+  pool:
+    github: ysbaddaden/pool
+    version: ~> 0.2.0
 
 authors:
     - Pine Mizune <pinemz@gmail.com>

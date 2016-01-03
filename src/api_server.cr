@@ -2,16 +2,18 @@ require "kemal"
 require "mysql"
 require "redis"
 
+require "./connections/*"
+require "./controllers/*"
 require "./entities/*"
 require "./resources/all"
 require "./services/all"
-require "./controllers/*"
 
+include Sharock::Connections
 include Sharock::Controllers::API
-include Sharock::Services
 include Sharock::Resources
+include Sharock::Services
 
-db = MySQL.connect("localhost", "root", "", "sharock", 3306_u16, nil)
+db = MySQLConnection.new("localhost", "root", "", "sharock", 3306_u16)
 redis = Redis.new
 
 resources = AllResources.new(db, redis)

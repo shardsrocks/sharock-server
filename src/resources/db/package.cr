@@ -3,32 +3,40 @@ module Sharock::Resources
     include Inflater::Package
     include Query::Select
 
-    def initialize(conn)
-      @conn = conn
+    def initialize(pool)
+      @pool = pool
     end
 
     def find
-      inflate select("package")
+      @pool.connect do |conn|
+        inflate select(conn, "package")
+      end
     end
 
     def find_one(id)
-      inflate_one select_by_id("package", id)
+      @pool.connect do |conn|
+        inflate_one select_by_id(conn, "package", id)
+      end
     end
 
     def find_one(host, owner, repo)
-      inflate_one select_by_repo(host, owner, repo)
+      @pool.connect do |conn|
+        inflate_one select_by_repo(conn, host, owner, repo)
+      end
     end
 
     def find_or_create_for_update(host, owner, repo)
-      rows = select_by_repo(host, owner, repo)
-      if rows == [] of Entities::Rows::Package
-        insert_by_repo(host, owner, repo)
-      end
+      @pool.connect do |conn|
+        rows = select_by_repo(conn, host, owner, repo)
+        if rows == [] of Entities::Rows::Package
+          insert_by_repo(conn, host, owner, repo)
+        end
 
-      inflate_one select_by_repo(host, owner, repo, true)
+        inflate_one select_by_repo(conn, host, owner, repo, true)
+      end
     end
 
-    protected def insert_by_repo(host, owner, repo)
+    protected def insert_by_repo(conn, host, owner, repo)
       params = {"host" => host, "owner" => owner, "repo" => repo}
       MySQL::Query
         .new(%{
@@ -37,10 +45,10 @@ module Sharock::Resources
           ON DUPLICATE KEY UPDATE
             `host` = :host, `owner` = :owner, `repo` = :repo
         }, params)
-        .run(@conn)
+        .run(conn)
     end
 
-    protected def select_by_repo(host, owner, repo, for_update = false)
+    protected def select_by_repo(conn, host, owner, repo, for_update = false)
       for_update = for_update ? "FOR UPDATE" : ""
       params = {"host" => host, "owner" => owner, "repo" => repo}
       MySQL::Query
@@ -51,7 +59,7 @@ module Sharock::Resources
           LIMIT 1
           #{for_update}
         }, params)
-        .run(@conn)
+        .run(conn)
     end
   end
 end
