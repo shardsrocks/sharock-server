@@ -1,3 +1,6 @@
+require "./inflater/*"
+require "./query/*"
+
 module Sharock::Resources
   class PackageDepsResource
     include Inflater::PackageDeps

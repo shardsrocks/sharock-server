@@ -1,5 +1,3 @@
-require "./db/inflater/*"
-require "./db/query/*"
 require "./db/*"
 require "./redis/*"
 
