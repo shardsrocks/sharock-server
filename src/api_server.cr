@@ -23,6 +23,7 @@ get "/" do |env|
 end
 
 get "/package/github/:owner/:repo" do |env|
+  env.add_header "Access-Control-Allow-Origin", "*" # FIXME
   package_ctrl.find_one_by_github(env)
 end
 
