@@ -16,6 +16,10 @@ CREATE TABLE `package_deps` (
   `id`         INTEGER   NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `package_id` INTEGER   NOT NULL,
   `version`    BIGINT    NOT NULL,
+  `status`     ENUM('uptodate', 'notsouptodate', 'outofdate', 'none', 'unknown')
+                         NOT NULL DEFAULT 'unknown',
+  `dev_status` ENUM('uptodate', 'notsouptodate', 'outofdate', 'none', 'unknown')
+                         NOT NULL DEFAULT 'unknown',
   `deps_data`  TEXT      NOT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (`package_id`) REFERENCES `package`(`id`)

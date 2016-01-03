@@ -18,8 +18,10 @@ module Sharock::Resources::Inflater
           row[0] as Int32,  # id
           row[1] as Int32,  # package_id
           row[2] as Int64,  # version
-          row[3] as String, # deps_data
-          row[4] as Time    # created_at
+          row[3] as String, # status
+          row[4] as String, # dev_status
+          row[5] as String, # deps_data
+          row[6] as Time    # created_at
         )
       else
         nil
