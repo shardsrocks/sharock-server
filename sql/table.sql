@@ -16,9 +16,9 @@ CREATE TABLE `package_deps` (
   `id`         INTEGER   NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `package_id` INTEGER   NOT NULL,
   `version`    BIGINT    NOT NULL,
-  `status`     ENUM('uptodate', 'notsouptodate', 'outofdate', 'none', 'unknown')
+  `status`     ENUM('up_to_date', 'not_so_up_to_date', 'out_of_date', 'none', 'unknown')
                          NOT NULL DEFAULT 'unknown',
-  `dev_status` ENUM('uptodate', 'notsouptodate', 'outofdate', 'none', 'unknown')
+  `dev_status` ENUM('up_to_date', 'not_so_up_to_date', 'out_of_date', 'none', 'unknown')
                          NOT NULL DEFAULT 'unknown',
   `deps_data`  TEXT      NOT NULL,
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
