@@ -22,8 +22,8 @@ module Sharock::Services
 
     def update_deps(package_id, deps)
       @pool.connect do |conn|
-        package_resource = PackageResource.new(conn)
-        package_resource.update_deps(
+        package_deps_resource = PackageDepsResource.new(conn)
+        package_deps_resource.insert_deps(
           package_id,
           "unknown",
           "unknown",
