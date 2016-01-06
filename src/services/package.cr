@@ -20,9 +20,16 @@ module Sharock::Services
       end
     end
 
-    def update_deps(id, deps)
-      p id
-      p deps
+    def update_deps(package_id, deps)
+      @pool.connect do |conn|
+        package_resource = PackageResource.new(conn)
+        package_resource.update_deps(
+          package_id,
+          "unknown",
+          "unknown",
+          deps.to_json
+        )
+      end
     end
 
     def needs_syncing(package : Entities::Results::Package?)
