@@ -8,7 +8,7 @@ module Sharock::Entities::Results
 
     def to_json(io : IO)
       io.json_object do |object|
-        object.field "rackage", @package
+        object.field "package", @package
         object.field "package_deps", @package_deps
       end
     end
