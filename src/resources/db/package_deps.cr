@@ -26,7 +26,7 @@ module Sharock::Resources
         .run(@conn)
     end
 
-    def insert_deps(package_id, status, dev_status, deps)
+    def insert_deps(package_id, status : String, dev_status : String, deps : String)
       params = {
         "package_id" => package_id,
         "version" => Time.now.epoch,
