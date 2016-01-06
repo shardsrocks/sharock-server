@@ -26,18 +26,18 @@ module Sharock::Resources
         .run(@conn)
     end
 
-    def insert_deps(package_id, status : String, dev_status : String, deps : String)
+    def insert_deps(package_id, status : String, dev_status : String, deps_data : String)
       params = {
         "package_id" => package_id,
         "version" => Time.now.epoch,
         "status" => status,
         "dev_status" => dev_status,
-        "deps" => deps,
+        "deps_data" => deps_data,
       }
       MySQL::Query
         .new(%{
-          INSERT INTO `package_deps` (`package_id`, `version`, `status`, `dev_status`, `deps`)
-          VALUES (:package_id, :version, :status, :dev_status, :deps)
+          INSERT INTO `package_deps` (`package_id`, `version`, `status`, `dev_status`, `deps_data`)
+          VALUES (:package_id, :version, :status, :dev_status, :deps_data)
         }, params)
         .run(@conn)
     end
