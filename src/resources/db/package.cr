@@ -1,7 +1,9 @@
+require "mysql"
+
 require "./inflater/*"
 require "./query/*"
 
-module Sharock::Resources
+module Sharock::Resources::DB
   class PackageResource
     include Inflater::Package
     include Query::Select
@@ -32,7 +34,7 @@ module Sharock::Resources
 
     def update_sync_started_at(id, sync_started_at)
       params = {"id" => id, "sync_started_at" => sync_started_at}
-      MySQL::Query
+      ::MySQL::Query
         .new(%{
           UPDATE `package`
           SET sync_started_at = :sync_started_at
@@ -43,7 +45,7 @@ module Sharock::Resources
 
     protected def insert_by_repo(host, owner, repo)
       params = {"host" => host, "owner" => owner, "repo" => repo}
-      MySQL::Query
+      ::MySQL::Query
         .new(%{
           INSERT INTO `package` (`host`, `owner`, `repo`)
           VALUES (:host, :owner, :repo)
@@ -56,7 +58,7 @@ module Sharock::Resources
     protected def select_by_repo(host, owner, repo, for_update = false)
       for_update = for_update ? "FOR UPDATE" : ""
       params = {"host" => host, "owner" => owner, "repo" => repo}
-      MySQL::Query
+      ::MySQL::Query
         .new(%{
           SELECT *
           FROM `package`

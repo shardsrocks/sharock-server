@@ -1,15 +1,16 @@
 require "../resources/db/package"
 require "../resources/db/package_deps"
 
-include Sharock::Resources
 
 module Sharock::Services
   class PackageService
-    def initialize(@pool)
+    include Sharock::Resources::DB
+
+    def initialize(@context = Services.context)
     end
 
     def find_one(host, owner, repo)
-      @pool.connect do |conn|
+      @context.mysql.connect do |conn|
         package = PackageResource.new(conn).find_one(host, owner, repo)
         package.try do |package|
           package_deps = PackageDepsResource.new(conn).find_one_latest_version(package.id)
@@ -21,7 +22,7 @@ module Sharock::Services
     end
 
     def update_deps(package_id, deps)
-      @pool.connect do |conn|
+      @context.mysql.connect do |conn|
         package_deps_resource = PackageDepsResource.new(conn)
         package_deps_resource.insert_deps(
           package_id,

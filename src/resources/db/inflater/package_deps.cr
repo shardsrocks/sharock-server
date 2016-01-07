@@ -1,4 +1,4 @@
-module Sharock::Resources::Inflater
+module Sharock::Resources::DB::Inflater
   module PackageDeps
     def inflate(responses)
       if responses.is_a? Array

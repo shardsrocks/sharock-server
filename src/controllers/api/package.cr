@@ -1,6 +1,14 @@
+require "../../services/package"
+require "../../services/resolver"
+
 module Sharock::Controllers::API
   class PackageController
-    def initialize(@services)
+    include Services
+
+    def initialize(
+      @package_service = PackageService.new,
+      @resolver_service = ResolverService.new
+    )
     end
 
     def find_one_by_github(env)
@@ -12,10 +20,10 @@ module Sharock::Controllers::API
       repo = env.params["repo"]
 
       if owner.is_a? String && repo.is_a? String
-        package = @services.package.find_one(host, owner, repo)
+        package = @package_service.find_one(host, owner, repo)
 
-        if @services.package.needs_syncing(package)
-          @services.resolver.sync(host, owner, repo)
+        if @package_service.needs_syncing(package)
+          @resolver_service.sync(host, owner, repo)
         end
 
         return package.to_json

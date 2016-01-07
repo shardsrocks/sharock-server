@@ -1,7 +1,9 @@
+require "mysql"
+
 require "./inflater/*"
 require "./query/*"
 
-module Sharock::Resources
+module Sharock::Resources::DB
   class PackageDepsResource
     include Inflater::PackageDeps
     include Query::Select
@@ -15,7 +17,7 @@ module Sharock::Resources
 
     def find_one_latest_version(package_id)
       params = { "package_id" => package_id }
-      inflate_one MySQL::Query
+      inflate_one ::MySQL::Query
         .new(%{
           SELECT *
           FROM `package_deps`
@@ -34,7 +36,7 @@ module Sharock::Resources
         "dev_status" => dev_status,
         "deps_data" => deps_data,
       }
-      MySQL::Query
+      ::MySQL::Query
         .new(%{
           INSERT INTO `package_deps` (`package_id`, `version`, `status`, `dev_status`, `deps_data`)
           VALUES (:package_id, :version, :status, :dev_status, :deps_data)
