@@ -1,3 +1,5 @@
+require "../../../entities/*"
+
 module Sharock::Resources::DB::Inflater
   module Package
     def inflate(responses)

@@ -11,16 +11,16 @@ module Sharock::Controllers::API
     )
     end
 
-    def find_one_by_github(env)
-      find_one(env, "github")
+    def fetch_by_github(env)
+      fetch(env, "github")
     end
 
-    protected def find_one(env, host)
+    protected def fetch(env, host)
       owner = env.params["owner"]
       repo = env.params["repo"]
 
       if owner.is_a? String && repo.is_a? String
-        package = @package_service.find_one(host, owner, repo)
+        package = @package_service.fetch_package(host, owner, repo)
 
         if @package_service.needs_syncing(package)
           @resolver_service.sync(host, owner, repo)

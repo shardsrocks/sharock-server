@@ -9,7 +9,7 @@ module Sharock::Services
     def initialize(@context = Services.context)
     end
 
-    def find_one(host, owner, repo)
+    def fetch_package(host, owner, repo)
       @context.mysql.connect do |conn|
         package = PackageResource.new(conn).find_one(host, owner, repo)
         package.try do |package|
@@ -44,6 +44,10 @@ module Sharock::Services
       end
 
       return true
+    end
+
+    def get_badge_url(dev, status) : String
+      ""
     end
   end
 end
