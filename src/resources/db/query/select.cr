@@ -19,17 +19,18 @@ module Sharock::Resources::DB::Query
     end
 
     def select_by_ids(conn, table, ids, for_update = false)
-      in_query = ids.map_with_index { |v, i| ":id_#{i}" }.join(",")
-      in_params = ids.map_with_index { |v, i| {"id_#{i}",v} }.to_h
-      in_params["limit"] = ids.size
+      ids_query = ids.map_with_index { |v, i| ":id_#{i}" }.join(",")
+      params = ids.map_with_index { |v, i| {"id_#{i}",v} }.to_h
+      params["limit"] = ids.size
       ::MySQL::Query
         .new(%{
           SELECT *
           FROM `#{table}`
-          WHERE `id` IN(#{in_query})
+          WHERE `id` IN(#{ids_query})
+          ORDER BY FIELD(`id`, #{ids_query})
           LIMIT :limit
           #{for_update ? "FOR UPDATE" : ""}
-        }, in_params)
+        }, params)
         .run(conn)
     end
   end
