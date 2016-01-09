@@ -1,3 +1,4 @@
+require "../config/assets"
 require "../resources/db/package"
 require "../resources/db/package_deps"
 
@@ -15,7 +16,12 @@ module Sharock::Services
         package.try do |package|
           package_deps = PackageDepsResource.new(conn).find_one_latest_version(package.id)
           package_deps.try do |package_deps|
-            return Entities::Results::Package.new(package, package_deps)
+            return Entities::Results::Package.new(
+              package,
+              package_deps,
+              fetch_badge_url(package, false),
+              fetch_badge_url(package, true)
+            )
           end
         end
       end
@@ -46,8 +52,18 @@ module Sharock::Services
       return true
     end
 
-    def get_badge_url(dev, status) : String
-      ""
+    def fetch_badge_svg(dev : Bool, status : String) : String
+      prefix = dev ? "dev-" : ""
+      path = "#{Config::ASSETS_DIR}/img/status/#{prefix}#{status}.svg"
+      File.read(path)
+    end
+
+    def fetch_badge_url(package : Entities::Rows::Package, dev : Bool)
+      prefix = dev ? "dev-" : ""
+      host = package.host
+      owner = package.owner
+      repo = package.repo
+      "/badge/#{host}/#{owner}/#{repo}/#{prefix}status.svg"
     end
   end
 end

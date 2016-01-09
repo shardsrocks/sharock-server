@@ -1,5 +1,13 @@
 module Sharock::Entities::Rows
   class PackageDeps
+    getter id
+    getter package_id
+    getter version
+    getter status
+    getter dev_status
+    getter deps_data
+    getter created_at
+
     def initialize(
       @id,
       @package_id,

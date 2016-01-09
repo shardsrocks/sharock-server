@@ -22,10 +22,13 @@ module Sharock::Controllers
       repo = env.params["repo"]
 
       if owner.is_a? String && repo.is_a? String
-        package = @package_service.fetch_package(host, owner, repo)
-        badge_url = @package_service.get_badge_url(dev, package)
-        redirect badge_url
-        return
+        result = @package_service.fetch_package(host, owner, repo)
+        result.try do |result|
+          status = dev ? result.package_deps.dev_status : result.package_deps.status
+          badge_svg = @package_service.fetch_badge_svg(dev, status)
+          env.content_type = "image/svg+xml"
+          return badge_svg
+        end
       end
 
       raise "Invalid parameters"
