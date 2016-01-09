@@ -27,6 +27,16 @@ module Sharock::Services
       end
     end
 
+    def search_recent_updated(count : Int)
+      @context.mysql.connect do |conn|
+        package_resource = PackageResource.new(conn)
+        package_deps_resource = PackageDepsResource.new(conn)
+        package_ids = package_deps_resource.find_recent_updated_package_ids(count)
+        packages = package_resource.find_by_ids(package_ids)
+        return packages
+      end
+    end
+
     def update_deps(package_id, deps)
       @context.mysql.connect do |conn|
         package_deps_resource = PackageDepsResource.new(conn)

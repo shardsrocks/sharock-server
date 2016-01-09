@@ -22,6 +22,13 @@ module Sharock::Routes
         end
         @package_controller.fetch_by_github(env)
       end
+
+      get "/api/package/recent_updated" do |env|
+        if Kemal.config.env == "development"
+          env.add_header "Access-Control-Allow-Origin", "*"
+        end
+        @package_controller.search_recent_updated(env)
+      end
     end
   end
 end

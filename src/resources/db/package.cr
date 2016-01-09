@@ -15,6 +15,10 @@ module Sharock::Resources::DB
       inflate select(@conn, "package")
     end
 
+    def find_by_ids(ids, for_update = false)
+      inflate select_by_ids(@conn, "package", ids, for_update)
+    end
+
     def find_one_by_id(id, for_update = false)
       inflate_one select_by_id(@conn, "package", id, for_update)
     end

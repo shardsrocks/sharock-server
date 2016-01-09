@@ -6,6 +6,7 @@ require "./query/*"
 module Sharock::Resources::DB
   class PackageDepsResource
     include Inflater::PackageDeps
+    include Inflater::I32Inflater
     include Query::Select
 
     def initialize(@conn)
@@ -41,6 +42,17 @@ module Sharock::Resources::DB
           INSERT INTO `package_deps` (`package_id`, `version`, `status`, `dev_status`, `deps_data`)
           VALUES (:package_id, :version, :status, :dev_status, :deps_data)
         }, params)
+        .run(@conn)
+    end
+
+    def find_recent_updated_package_ids(count)
+      inflate_i32 ::MySQL::Query
+        .new(%{
+          SELECT DISTINCT `package_id`
+          FROM `package_deps`
+          ORDER BY `version` DESC
+          LIMIT :count
+        }, { "count" => count })
         .run(@conn)
     end
   end

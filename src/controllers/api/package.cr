@@ -15,6 +15,16 @@ module Sharock::Controllers::API
       fetch(env, "github")
     end
 
+    def search_recent_updated(env)
+      count_param = env.params["count"]?
+      count = if count_param.is_a? String
+                count_param.to_i?
+              end
+      count ||= 10
+      packages = @package_service.search_recent_updated(count)
+      return packages.to_json
+    end
+
     protected def fetch(env, host)
       owner = env.params["owner"]
       repo = env.params["repo"]
