@@ -59,11 +59,11 @@ module Sharock::Services
     end
 
     def fetch_badge_url(package : Entities::Rows::Package, dev : Bool)
-      prefix = dev ? "dev-" : ""
+      prefix = dev ? "dev_" : ""
       host = package.host
       owner = package.owner
       repo = package.repo
-      "/badge/#{host}/#{owner}/#{repo}/#{prefix}status.svg"
+      "badge/#{host}/#{owner}/#{repo}/#{prefix}status.svg"
     end
   end
 end
