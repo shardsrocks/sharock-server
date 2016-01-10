@@ -10,7 +10,7 @@ module Sharock::Services
     def initialize(@context = Services.context)
     end
 
-    def fetch_package(host, owner, repo)
+    def fetch_package_result(host, owner, repo)
       @context.mysql.connect do |conn|
         package = PackageResource.new(conn).find_one(host, owner, repo)
         package.try do |package|
@@ -24,6 +24,12 @@ module Sharock::Services
             )
           end
         end
+      end
+    end
+
+    def fetch_package(host, owner, repo)
+      @context.mysql.connect do |conn|
+        PackageResource.new(conn).find_one(host, owner, repo)
       end
     end
 

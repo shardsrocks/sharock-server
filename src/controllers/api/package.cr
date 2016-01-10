@@ -30,7 +30,7 @@ module Sharock::Controllers::API
       repo = env.params["repo"]
 
       if owner.is_a? String && repo.is_a? String
-        package = @package_service.fetch_package(host, owner, repo)
+        package = @package_service.fetch_package_result(host, owner, repo)
         @resolver_service.sync_if_needs(host, owner, repo)
         return package.to_json
       end
