@@ -69,7 +69,7 @@ module Sharock::Services
 
       # unpinned
       out_of_date_count = dependencies.select { |dep| dep.status == "out_of_date" }.size
-      if dependencies.size.to_f / out_of_date_count.to_f > 0.25
+      if out_of_date_count.to_f / dependencies.size.to_f >  0.25
         "out_of_date"
       elsif out_of_date_count > 0
         "not_so_up_to_date"
