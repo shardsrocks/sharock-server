@@ -75,6 +75,7 @@ module Sharock::Services
         "not_so_up_to_date"
       else
         "up_to_date"
+      end
     end
   end
 end
