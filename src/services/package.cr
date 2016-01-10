@@ -42,24 +42,11 @@ module Sharock::Services
         package_deps_resource = PackageDepsResource.new(conn)
         package_deps_resource.insert_deps(
           package_id,
-          "unknown",
-          "unknown",
+          compute_status(deps.dependencies),
+          compute_status(deps.development_dependencies),
           deps.to_json
         )
       end
-    end
-
-    def needs_syncing(package : Entities::Results::Package?)
-      package.try do |package|
-        package.package.sync_started_at.try do |sync_started_at|
-          span = Time.now - sync_started_at
-          return span.seconds > Config::CACHE_TIME_SEC
-        end
-
-        return true
-      end
-
-      return true
     end
 
     def fetch_badge_svg(dev : Bool, status : String) : String
@@ -74,6 +61,20 @@ module Sharock::Services
       owner = package.owner
       repo = package.repo
       "badge/#{host}/#{owner}/#{repo}/#{prefix}status.svg"
+    end
+
+    # https://github.com/alanshaw/david-www/blob/6ce1f5b6cbce2e7cd6f26acc95eed2d9002885cb/lib/brains.js#L332-L336
+    def compute_status(dependencies)
+      return "none" if dependencies.size == 0
+
+      # unpinned
+      out_of_date_count = dependencies.filter { |dep| dep.status == "out_of_date" }
+      if dependencies.size.to_f / out_of_date_count > 0.25
+        "out_of_date"
+      elsif out_of_date_count > 0
+        "not_so_up_to_date"
+      else
+        "up_to_date"
     end
   end
 end

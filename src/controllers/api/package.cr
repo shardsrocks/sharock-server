@@ -31,11 +31,7 @@ module Sharock::Controllers::API
 
       if owner.is_a? String && repo.is_a? String
         package = @package_service.fetch_package(host, owner, repo)
-
-        if @package_service.needs_syncing(package)
-          @resolver_service.sync(host, owner, repo)
-        end
-
+        @resolver_service.sync_if_needs(host, owner, repo)
         return package.to_json
       end
 
