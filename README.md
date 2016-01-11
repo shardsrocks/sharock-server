@@ -1,4 +1,4 @@
-# sharock-api-server
+# Sharock Server
 [![Dependency Status](https://shards.rocks/badge/github/shardsrocks/sharock-api-server/status.svg)](https://shards.rocks/github/shardsrocks/sharock-api-server)
 [![Dependency Status](https://shards.rocks/badge/github/shardsrocks/sharock-api-server/dev_status.svg)](https://shards.rocks/github/shardsrocks/sharock-api-server)
 
