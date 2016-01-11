@@ -15,6 +15,6 @@ redis = RedisConnection.new
 
 Sharock::Services::Context.bootstrap(mysql, redis)
 
-Sharock::Routes::API.register
+Sharock::Routes::API::Keepalive.register
+Sharock::Routes::API::Package.register
 Sharock::Routes::Badge.register
-Sharock::Routes::Keepalive.register
