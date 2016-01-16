@@ -8,4 +8,4 @@ deployment:
     commands:
       - |-
         ssh sharock1.pine.moe -l sharock \
-          bash ~/project/sharock-deploy/server/deploy.bash
+          bash /home/sharock/project/sharock-deploy/server/deploy.bash
