@@ -10,7 +10,7 @@ shards:
 
   pool:
     github: ysbaddaden/pool
-    version: 0.2.0
+    version: 0.2.1
 
   redis:
     github: stefanwille/crystal-redis
@@ -19,4 +19,12 @@ shards:
   resque_client:
     github: pine613/crystal-resque-client
     version: 0.1.0
+
+  shards:
+    github: ysbaddaden/shards
+    version: 0.5.4
+
+  sharock_resolver:
+    github: shardsrocks/sharock-resolver
+    commit: 943aab02549f53b486a49f8d240cda2e8e953a1f
 

@@ -3,3 +3,4 @@
 /libs
 
 /bin/sharock-api-server
+/bin/sharock-worker

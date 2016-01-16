@@ -22,7 +22,7 @@ module Sharock::Controllers
       repo = env.params["repo"]
 
       if owner.is_a? String && repo.is_a? String
-        result = @package_service.fetch_package(host, owner, repo)
+        result = @package_service.fetch_package_result(host, owner, repo)
         result.try do |result|
           status = dev ? result.package_deps.dev_status : result.package_deps.status
           badge_svg = @package_service.fetch_badge_svg(dev, status)
