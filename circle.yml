@@ -6,6 +6,6 @@ deployment:
   production:
     branch: master
     commands:
-      - >-
-        ssh sharock1.pine.moe -l sharock
+      - |-
+        ssh sharock1.pine.moe -l sharock \
           bash ~/project/sharock-deploy/server/deploy.bash
