@@ -2,5 +2,7 @@
 /.shards
 /libs
 
+npm-debug.log
+
 /bin/sharock-api-server
 /bin/sharock-worker

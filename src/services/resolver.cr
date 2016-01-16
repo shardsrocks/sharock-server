@@ -39,7 +39,7 @@ module Sharock::Services
       package.try do |package|
         package.sync_started_at.try do |sync_started_at|
           span = Time.now - sync_started_at
-          return span.seconds > Config::CACHE_TIME_SEC
+          return span.total_seconds > Config::CACHE_TIME_SEC
         end
 
         return true
