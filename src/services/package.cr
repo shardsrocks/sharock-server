@@ -33,6 +33,12 @@ module Sharock::Services
       end
     end
 
+    def fetch_package_by_id(package_id)
+      @context.mysql.connect do |conn|
+        PackageResource.new(conn).find_one_by_id(package_id)
+      end
+    end
+
     def search_recent_updated(count : Int)
       @context.mysql.connect do |conn|
         package_resource = PackageResource.new(conn)
