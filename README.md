@@ -1,4 +1,5 @@
 # Sharock Server
+[![Circle CI](https://img.shields.io/circleci/project/shardsrocks/sharock-server/master.svg)](https://circleci.com/gh/shardsrocks/sharock-server/tree/master)
 [![Dependency Status](https://shards.rocks/badge/github/shardsrocks/sharock-api-server/status.svg)](https://shards.rocks/github/shardsrocks/sharock-api-server)
 [![Dependency Status](https://shards.rocks/badge/github/shardsrocks/sharock-api-server/dev_status.svg)](https://shards.rocks/github/shardsrocks/sharock-api-server)
 
