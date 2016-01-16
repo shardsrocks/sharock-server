@@ -5,7 +5,7 @@
 
 ## Requirements
 
-- Crystal v0.10.0
+- Crystal v0.10.2
 - MySQL
 - Redis
 - [goworker](https://github.com/benmanns/goworker) ([Resque](https://github.com/benmanns/goworker) compatible)
