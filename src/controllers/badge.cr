@@ -1,11 +1,13 @@
 require "../services/package"
+require "../services/resolver"
 
 module Sharock::Controllers
   class BadgeController
     include Services
 
     def initialize(
-      @package_service = PackageService.new
+      @package_service = PackageService.new,
+      @resolver_service = ResolverService.new
     )
     end
 
@@ -22,6 +24,8 @@ module Sharock::Controllers
       repo = env.params["repo"]
 
       if owner.is_a? String && repo.is_a? String
+        @resolver_service.sync_if_needs(host, owner, repo)
+
         result = @package_service.fetch_package_result(host, owner, repo)
         result.try do |result|
           status = dev ? result.package_deps.dev_status : result.package_deps.status
