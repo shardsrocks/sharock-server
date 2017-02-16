@@ -2,23 +2,35 @@ version: 1.0
 shards:
   kemal:
     github: sdogruyol/kemal
-    commit: c21567fe17e67523726ca33373fa9c3f05454904
+    version: 0.18.0
+
+  kilt:
+    github: jeromegn/kilt
+    version: 0.3.3
+
+  multipart:
+    github: RX14/multipart.cr
+    version: 0.1.2
 
   mysql:
-    github: pine613/crystal-mysql
-    commit: 044f8f73a2422f360868ea26c17a215a13e34a80
+    github: waterlink/crystal-mysql
+    version: 0.4.4
 
   pool:
     github: ysbaddaden/pool
-    version: 0.2.1
+    version: 0.2.3
+
+  radix:
+    github: luislavena/radix
+    version: 0.3.7
 
   redis:
     github: stefanwille/crystal-redis
-    version: 1.2.1
+    version: 1.7.1
 
-  resque_client:
+  resque:
     github: pine613/crystal-resque-client
-    version: 0.1.0
+    version: 0.1.1
 
   shards:
     github: ysbaddaden/shards
