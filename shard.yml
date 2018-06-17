@@ -4,18 +4,18 @@ version: 0.1.0
 dependencies:
   kemal:
     github: sdogruyol/kemal
-    version: ~> 0.7.0
+    version: ~> 0.23.0
   mysql:
-    github: waterlink/crystal-mysql
-    version: ~> 0.4.0
+    github: crystal-lang/crystal-mysql
+    version: ~> 0.5.0
   redis:
     github: stefanwille/crystal-redis
-    version: ~> 1.2.1
+    version: ~> 1.11.0
   pool:
     github: ysbaddaden/pool
-    version: ~> 0.2.0
-  resque_client:
-    github: pine613/crystal-resque-client
+    version: ~> 0.2.3
+  resque:
+    github: pine/crystal-resque-client
     version: 0.1.0
   sharock_resolver:
     github: shardsrocks/sharock-resolver

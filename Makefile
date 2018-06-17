@@ -1,3 +1,4 @@
+SHARDS   := shards
 CRYSTAL  := crystal
 DEVELOP_OPT :=
 
@@ -13,7 +14,7 @@ WORKER_BIN := sharock-worker
 default: clean install build
 
 install:
-	$(CRYSTAL) deps
+	$(SHARDS) install
 
 build:
 	$(CRYSTAL) build src/$(SERVER_SRC) -o bin/$(SERVER_BIN) $(DEVELOP_OPT)
@@ -26,5 +27,4 @@ release:
 clean:
 	rm -rf .crystal
 	rm -rf .shards
-	rm -rf libs
-
+	rm -rf lib
