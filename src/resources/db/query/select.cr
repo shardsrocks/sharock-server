@@ -2,11 +2,11 @@ require "mysql"
 
 module Sharock::Resources::DB::Query
   module Select
-    def select(conn, table)
+    def _select(conn, table)
       conn.query(%{ SELECT * FROM `#{table}` })
     end
 
-    def select_by_id(conn, table, id, for_update = false)
+    def _select_by_id(conn, table, id, for_update = false)
       ::MySQL::Query
         .new(%{
           SELECT *
@@ -18,7 +18,7 @@ module Sharock::Resources::DB::Query
         .run(conn)
     end
 
-    def select_by_ids(conn, table, ids, for_update = false)
+    def _select_by_ids(conn, table, ids, for_update = false)
       ids_query = ids.map_with_index { |v, i| ":id_#{i}" }.join(",")
       where_query = ids.size > 0 ? "WHERE `id` IN(#{ids_query})" : ""
       order_by_query = ids.size > 0 ? "ORDER BY FIELD(`id`, #{ids_query})" : ""

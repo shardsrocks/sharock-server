@@ -4,7 +4,7 @@ module Sharock::Resources::DB::Inflater
       if responses.is_a? Array
         responses.map { |response|
           if response.is_a? Array
-            response[0] as Int32
+            response[0].as(Int32)
           end
         }.compact
       else

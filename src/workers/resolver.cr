@@ -24,10 +24,10 @@ module Sharock::Workers
       package = @package_service.fetch_package_by_id(package_id)
       raise "Package is not found (id = #{package_id})" unless package
 
-      repository = Resolver::Repository.new
+      repository = Sharock::Resolver::Repository.new
       repository.github = "#{package.owner}/#{package.repo}"
 
-      resolver = Resolver::Resolver.new
+      resolver = Sharock::Resolver::Resolver.new
       resolver.resolve(repository).try do |dependency_list|
         result = Results::DependencyList.new(dependency_list)
         puts result.to_json

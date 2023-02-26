@@ -9,11 +9,11 @@ module Sharock::Resources::DB
     include Inflater::I32Inflater
     include Query::Select
 
-    def initialize(@conn)
+    def initialize(@conn : MySQL::Connection)
     end
 
     def find
-      inflate select(@conn, "package_deps")
+      inflate _select(@conn, "package_deps")
     end
 
     def find_one_latest_version(package_id)
@@ -48,7 +48,7 @@ module Sharock::Resources::DB
     def find_recent_updated_package_ids(count)
       inflate_i32 ::MySQL::Query
         .new(%{
-          SELECT DISTINCT `package_id`
+          SELECT DISTINCT `package_id`, `version`
           FROM `package_deps`
           ORDER BY `version` DESC
           LIMIT :count

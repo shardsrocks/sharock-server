@@ -12,8 +12,8 @@ module Sharock::Services
   class Context
     include Connections
 
-    getter! mysql :: MySQLConnection
-    getter! redis :: RedisConnection
+    getter! mysql : MySQLConnection
+    getter! redis : RedisConnection
 
     def self.bootstrap(
       mysql : MySQLConnection,

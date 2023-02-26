@@ -1,0 +1,14 @@
+name: pool
+version: 0.2.4
+description: Generic (connection) pools
+
+authors:
+  - Julien Portalier <julien@portalier.com>
+
+crystal: "*"
+
+development_dependencies:
+  minitest:
+    github: ysbaddaden/minitest.cr
+
+license: Apache-2.0

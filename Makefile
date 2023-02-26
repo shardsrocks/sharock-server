@@ -16,8 +16,8 @@ install:
 	$(CRYSTAL) deps
 
 build:
-	$(CRYSTAL) build src/$(SERVER_SRC) -o bin/$(SERVER_BIN) $(DEVELOP_OPT)
-	$(CRYSTAL) build src/$(WORKER_SRC) -o bin/$(WORKER_BIN) $(DEVELOP_OPT)
+	#$(CRYSTAL) build src/$(SERVER_SRC) -o bin/$(SERVER_BIN) $(DEVELOP_OPT)
+	$(CRYSTAL) build --link-flags='-no-pie' src/$(WORKER_SRC) -o bin/$(WORKER_BIN) $(DEVELOP_OPT)
 
 release:
 	$(CRYSTAL) build src/$(SERVER_SRC) -o bin/$(SERVER_BIN) $(RELEASE_OPT)

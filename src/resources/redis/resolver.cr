@@ -1,4 +1,4 @@
-require "resque_client"
+require "resque"
 
 module Sharock::Resources::Redis
   class ResolverResource

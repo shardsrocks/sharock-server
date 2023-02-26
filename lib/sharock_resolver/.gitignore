@@ -1,0 +1,7 @@
+/.crystal
+/.shards
+/libs
+/lib
+shard.lock
+
+/bin/resolver

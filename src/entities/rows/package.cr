@@ -1,5 +1,7 @@
 module Sharock::Entities::Rows
   class Package
+    #nclude JSON::Serializable
+
     getter id
     getter host
     getter owner
@@ -7,16 +9,19 @@ module Sharock::Entities::Rows
     getter sync_started_at
     getter created_at
 
-    def initialize(@id, @host, @owner, @repo, @sync_started_at, @created_at)
+    def initialize(@id =0, @host="", @owner="", @repo="", @sync_started_at : Time | Nil = Time.utc, @created_at : Time | Nil = Time.utc)
     end
 
     def to_json(io : IO)
-      io.json_object do |object|
-        object.field "id", @id
-        object.field "host", @host
-        object.field "owner", @owner
-        object.field "repo", @repo
+      JSON.build do |json|
+        json.object do
+          json.field "id", @id
+          json.field "host", @host
+          json.field "owner", @owner
+          json.field "repo", @repo
+        end
       end
     end
   end
 end
+

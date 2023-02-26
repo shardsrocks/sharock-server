@@ -5,10 +5,12 @@
 
 ## Requirements
 
-- Crystal v0.10.2
+- Crystal v0.10.2 try https://github.com/crenv/crenv and Ubuntu 18.04 in a VM to compile all easier
 - MySQL
 - Redis
 - [goworker](https://github.com/benmanns/goworker) ([Resque](https://github.com/benmanns/goworker) compatible)
+
+> Note: if you get a libssl1.0-dev bug check this: https://bugs.launchpad.net/ubuntu/+source/mysql-5.7/+bug/1861304
 
 ## Design
 
@@ -27,3 +29,4 @@ $ make
 
 ## License
 MIT License
+

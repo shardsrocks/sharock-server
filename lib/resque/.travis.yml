@@ -1,0 +1,24 @@
+language: c
+sudo: false
+
+services:
+  - redis-server
+
+env:
+  global:
+    - PATH=$HOME/.crenv/bin:$PATH
+  matrix:
+    - CRYSTAL_VERSION=0.10.0
+
+install:
+  - curl -L https://raw.github.com/pine613/crenv/master/install.sh | bash
+  - eval "$(crenv init -)"
+  - crenv install $CRYSTAL_VERSION
+  - crenv global $CRYSTAL_VERSION
+  - crystal --version
+
+before_script:
+  - crystal deps
+
+script:
+  - crystal spec -v

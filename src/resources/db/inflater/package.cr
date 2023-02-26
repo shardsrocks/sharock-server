@@ -17,12 +17,12 @@ module Sharock::Resources::DB::Inflater
     protected def inflate_row(row)
       if row.is_a? Array
         Entities::Rows::Package.new(
-          row[0] as Int32,  # id
-          row[1] as String, # host
-          row[2] as String, # owner
-          row[3] as String, # repo
-          row[4] as Time?,  # sync_started_at
-          row[5] as Time    # created_at
+          row[0].as(Int32),  # id
+          row[1].as(String), # host
+          row[2].as(String), # owner
+          row[3].as(String), # repo
+          row[4].as(Time?),  # sync_started_at
+          row[5].as(Time)    # created_at
         )
       else
         nil

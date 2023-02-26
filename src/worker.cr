@@ -5,7 +5,7 @@ require "./workers/*"
 
 include Sharock::Connections
 
-MYSQL_HOST     = ENV["MYSQL_HOST"]?     || "localhost"
+MYSQL_HOST     = ENV["MYSQL_HOST"]?     || "127.0.0.1"
 MYSQL_USER     = ENV["MYSQL_USER"]?     || "root"
 MYSQL_PASSWORD = ENV["MYSQL_PASSWORD"]? || ""
 MYSQL_DBNAME   = ENV["MYSQL_DBNAME"]?   || "sharock"
