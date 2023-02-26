@@ -1,6 +1,8 @@
 /.crystal
 /.shards
 /libs
+/lib
+/bin2/*
 
 npm-debug.log
 
