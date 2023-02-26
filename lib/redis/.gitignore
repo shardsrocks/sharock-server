@@ -1,8 +1,0 @@
-.crystal/
-.deps/
-.deps.lock
-libs/
-./redis
-doc
-TODO.md
-experiments

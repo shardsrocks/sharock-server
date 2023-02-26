@@ -1,8 +1,0 @@
-/.crystal
-/.shards
-/lib
-/bin/shards
-/test/.repositories
-/test/.shards
-/test/.lib
-/tmp
